@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
+    <PackageReference Include="Ksuid" Version="1.0.0-build4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotKsuid\DotKsuid.csproj" />
+  </ItemGroup>
+</Project>

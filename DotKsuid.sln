@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotKsuid", "DotKsuid\DotKsu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotKsuid.Tests", "DotKsuid.Tests\DotKsuid.Tests.csproj", "{9531E64E-23AD-4552-9A81-2DC54446D53E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotKsuid.Benchmarks", "DotKsuid.Benchmarks\DotKsuid.Benchmarks.csproj", "{54355E8D-B8F5-4906-9B07-9DA4AA794991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9531E64E-23AD-4552-9A81-2DC54446D53E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9531E64E-23AD-4552-9A81-2DC54446D53E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9531E64E-23AD-4552-9A81-2DC54446D53E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54355E8D-B8F5-4906-9B07-9DA4AA794991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54355E8D-B8F5-4906-9B07-9DA4AA794991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54355E8D-B8F5-4906-9B07-9DA4AA794991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54355E8D-B8F5-4906-9B07-9DA4AA794991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
