@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Base62;
 
 namespace DotKsuid
@@ -27,8 +26,10 @@ namespace DotKsuid
             {
                 Array.Reverse(timestampBytes);
             }
+            _ksuid = new byte[byteLength];
 
-            _ksuid = timestampBytes.Concat(payload).ToArray();
+            Buffer.BlockCopy(timestampBytes, 0, _ksuid, 0, timestampBytes.Length);
+            Buffer.BlockCopy(payload, 0, _ksuid, timestampBytes.Length, payloadLengthInBytes);
         }
 
         public static Ksuid NewKsuid()
