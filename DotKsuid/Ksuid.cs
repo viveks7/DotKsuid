@@ -12,22 +12,23 @@ namespace DotKsuid
         private const int stringEncodedLength = 27;
         private const string minStringEncoded = "000000000000000000000000000";
         private const string maxStringEncoded = "aWgEPTl1tmebfsQzFP4bxwgy80V";
+        private const char padding = '0';
         private readonly byte[] _ksuid;
 
         public Ksuid()
         {
             var payload = new byte[payloadLengthInBytes];
-            var rndm = new Random();
-            rndm.NextBytes(payload);
+            ThreadSafeRandom.NextBytes(payload);
 
             var timestamp = Convert.ToUInt32(DateTimeOffset.UtcNow.ToUnixTimeSeconds() - EpochStamp);
             var timestampBytes = BitConverter.GetBytes(timestamp);
+
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(timestampBytes);
             }
-            _ksuid = new byte[byteLength];
 
+            _ksuid = new byte[byteLength];
             Buffer.BlockCopy(timestampBytes, 0, _ksuid, 0, timestampBytes.Length);
             Buffer.BlockCopy(payload, 0, _ksuid, timestampBytes.Length, payloadLengthInBytes);
         }
@@ -39,7 +40,12 @@ namespace DotKsuid
 
         public override string ToString()
         {
-            return _ksuid.ToBase62().PadLeft(stringEncodedLength, '0');
+            return _ksuid.ToBase62().PadLeft(stringEncodedLength, padding);
+        }
+
+        public byte[] ToBytes()
+        {
+            return _ksuid;
         }
     }
 }
