@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace DotKsuid
@@ -50,10 +49,10 @@ namespace DotKsuid
             return dest;
         }
 
-        public static string ToBase62(this byte[] src)
+        public static string ToBase62(this byte[] src, int expectedLength)
         {
             var converted = FastEncodeBase62(src);
-            var builder = new StringBuilder();
+            var builder = new StringBuilder(expectedLength);
             foreach (var t in converted)
             {
                 builder.Append(Base62Characters[t]);
