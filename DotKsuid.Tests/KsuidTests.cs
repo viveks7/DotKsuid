@@ -13,8 +13,11 @@ namespace DotKsuid.Tests
             // actual
             var actual = ksuid.ToString();
 
+            var customString = ksuid.ToBytes().ToBase62Custom();
+
             // assert
             Assert.NotNull(actual);
+            Assert.Equal(actual, customString);
         }
     }
 }

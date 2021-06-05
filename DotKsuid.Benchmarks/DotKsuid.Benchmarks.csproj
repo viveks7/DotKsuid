@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.0" />
     <PackageReference Include="Ksuid" Version="1.0.0-build4" />
+    <PackageReference Include="Base62-Net" Version="1.2.157201" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotKsuid\DotKsuid.csproj" />
