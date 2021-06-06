@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace DotKsuid
@@ -30,21 +31,23 @@ namespace DotKsuid
             var destLength = dest.Length;
             while(parts.Length > 0)
             {
-                var quotient = new List<uint>();
+                Span<uint> quotient = stackalloc uint[5];
                 ulong remainder = 0;
+                int counter = 0;
                 foreach (var part in parts)
                 {
                     ulong accumulator = part + remainder * maxUInt;
                     var digit = accumulator / base62;
                     remainder = accumulator % base62;
-                    if (quotient.Count > 0 || digit > 0)
+                    if (counter != 0 || digit != 0)
                     {
-                        quotient.Add((uint)digit);
+                        quotient[counter] = (uint)digit;
+                        counter++;
                     }
                 }
                 destLength--;
                 dest[destLength] = (byte)remainder;
-                parts = quotient.ToArray();
+                parts = quotient.Slice(0, counter).ToArray();
             }
             return dest;
         }
