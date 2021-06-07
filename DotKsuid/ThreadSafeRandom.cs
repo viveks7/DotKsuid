@@ -3,9 +3,9 @@ using System.Threading;
 
 namespace DotKsuid
 {
-    public static class ThreadSafeRandom
+    static class ThreadSafeRandom
     {
-        private static readonly System.Random GlobalRandom = new Random();
+        private static readonly Random GlobalRandom = new Random();
         private static readonly ThreadLocal<Random> LocalRandom = new ThreadLocal<Random>(() =>
         {
             lock (GlobalRandom)

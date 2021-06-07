@@ -39,7 +39,7 @@ namespace DotKsuid
 
         public override string ToString()
         {
-            return _ksuid.ToBase62(stringEncodedLength)
+            return _ksuid.ToBase62()
                     .PadLeft(stringEncodedLength, padding);
         }
 

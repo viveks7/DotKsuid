@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DotKsuid
 {
-    public static class Base62
+    static class Base62
     {
-        public const string Base62Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-        public const string ZeroString = "000000000000000000000000000";
+        public static readonly char[] Base62Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".ToCharArray();
 
         public const int OffsetUppercase = 10;
 
@@ -17,7 +13,21 @@ namespace DotKsuid
         public const uint base62 = 62;
         public const ulong maxUInt = 4294967296;
 
-        public static byte[] FastEncodeBase62(byte[] src)
+
+        public static string ToBase62(this byte[] src)
+        {
+            var converted = FastEncodeBase62(src);
+            return string.Create(converted.Length, converted, (buffer, base62Array) =>
+            {
+                var encode62Chars = Base62Characters;
+                for (int i=base62Array.Length-1;  i>=0; i--)
+                {
+                    buffer[i] = encode62Chars[base62Array[i]];
+                }
+            });
+        }
+
+        private static byte[] FastEncodeBase62(byte[] src)
         {
             var dest = new byte[27];
             var parts = new uint[5]
@@ -52,15 +62,5 @@ namespace DotKsuid
             return dest;
         }
 
-        public static string ToBase62(this byte[] src, int expectedLength)
-        {
-            var converted = FastEncodeBase62(src);
-            var builder = new StringBuilder(expectedLength);
-            foreach (var t in converted)
-            {
-                builder.Append(Base62Characters[t]);
-            }
-            return builder.ToString();
-        }
     }
 }
