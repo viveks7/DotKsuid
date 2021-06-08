@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DotKsuid
 {
@@ -9,12 +10,10 @@ namespace DotKsuid
         private const int payloadLengthInBytes = 16;
         private const int byteLength = timestampLengthInBytes + payloadLengthInBytes;
         private const int stringEncodedLength = 27;
-        private const string minStringEncoded = "000000000000000000000000000";
-        private const string maxStringEncoded = "aWgEPTl1tmebfsQzFP4bxwgy80V";
-        private const char padding = '0';
+        private const char Padding = '0';
         private readonly byte[] _ksuid;
 
-        public Ksuid()
+        private Ksuid()
         {
             var payload = new byte[payloadLengthInBytes];
             ThreadSafeRandom.NextBytes(payload);
@@ -32,6 +31,16 @@ namespace DotKsuid
             Buffer.BlockCopy(payload, 0, _ksuid, timestampBytes.Length, payloadLengthInBytes);
         }
 
+        private Ksuid(byte[] bytes)
+        {
+            _ksuid = new byte[byteLength];
+            Buffer.BlockCopy(bytes, 0, _ksuid, 0, bytes.Length);
+        }
+
+        public static Ksuid MaxKsuid => new Ksuid(Enumerable.Repeat<byte>(255, 20).ToArray());
+
+        public static Ksuid MinKsuid => new Ksuid(Enumerable.Repeat<byte>(0, 20).ToArray());
+
         public static Ksuid NewKsuid()
         {
             return new Ksuid();
@@ -40,12 +49,14 @@ namespace DotKsuid
         public override string ToString()
         {
             return _ksuid.ToBase62()
-                    .PadLeft(stringEncodedLength, padding);
+                    .PadLeft(stringEncodedLength, Padding);
         }
 
         public byte[] ToBytes()
         {
             return _ksuid;
         }
+
+        
     }
 }
