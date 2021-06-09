@@ -27,7 +27,7 @@ namespace DotKsuid
             }
 
             _ksuid = new byte[byteLength];
-            Buffer.BlockCopy(timestampBytes, 0, _ksuid, 0, timestampBytes.Length);
+            Buffer.BlockCopy(timestampBytes, 0, _ksuid, 0, timestampLengthInBytes);
             Buffer.BlockCopy(payload, 0, _ksuid, timestampBytes.Length, payloadLengthInBytes);
         }
 
@@ -37,9 +37,9 @@ namespace DotKsuid
             Buffer.BlockCopy(bytes, 0, _ksuid, 0, bytes.Length);
         }
 
-        public static Ksuid MaxKsuid => new Ksuid(Enumerable.Repeat<byte>(255, 20).ToArray());
+        public static Ksuid MaxKsuid => new Ksuid(Enumerable.Repeat<byte>(255, byteLength).ToArray());
 
-        public static Ksuid MinKsuid => new Ksuid(Enumerable.Repeat<byte>(0, 20).ToArray());
+        public static Ksuid MinKsuid => new Ksuid(Enumerable.Repeat<byte>(0, byteLength).ToArray());
 
         public static Ksuid NewKsuid()
         {
@@ -56,7 +56,5 @@ namespace DotKsuid
         {
             return _ksuid;
         }
-
-        
     }
 }
