@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BenchmarkDotNet.Attributes;
 
 namespace DotKsuid.Benchmarks
@@ -27,6 +28,7 @@ namespace DotKsuid.Benchmarks
 
         //private Ksuid ksuid;
         //private KSUID.Ksuid _ksuid;
+        //private byte[] input = Enumerable.Repeat<byte>(255, 20).ToArray();
 
         //[GlobalSetup]
         //public void GlobalSetup()

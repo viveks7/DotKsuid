@@ -46,7 +46,7 @@ namespace DotKsuid.Tests
         }
 
         [Fact]
-        public void MinKsuid_GetMaximumValueKsuid()
+        public void MinKsuid_GetMinimumValueKsuid()
         {
             // arrange
             var expected = "000000000000000000000000000";
