@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using BenchmarkDotNet.Attributes;
 
 namespace DotKsuid.Benchmarks
@@ -15,7 +14,6 @@ namespace DotKsuid.Benchmarks
 
         [Benchmark]
         public KSUID.Ksuid KsuidNet() => KSUID.Ksuid.Generate();
-
 
         [Benchmark]
         public string KsuidString() => Ksuid.NewKsuid().ToString();
