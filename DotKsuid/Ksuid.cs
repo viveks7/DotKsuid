@@ -23,6 +23,27 @@ namespace DotKsuid
 
         public static Ksuid FromBytes(byte[] bytes) => new Ksuid(bytes);
 
+        public static Ksuid Parse(byte[] bytes)
+        {
+            if (bytes == null)
+            {
+                throw new ArgumentNullException("bytes");
+            }
+
+            if (bytes.Length != 20)
+            {
+                throw new ArgumentException("Bytes length is invalid");
+            }
+
+            return new Ksuid(bytes);
+        }
+
+        public static Ksuid Parse(string value)
+        {
+            var bytes = value.FromBase62();
+            return new Ksuid(bytes);
+        }
+
         private Ksuid()
         {
             _payload = new byte[payloadLengthInBytes];

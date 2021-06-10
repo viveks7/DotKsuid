@@ -57,5 +57,20 @@ namespace DotKsuid.Tests
             // assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void Parse_ShouldParseStringToKsuid()
+        {
+            // arrange
+            var ksuid = Ksuid.NewKsuid();
+            var expected = ksuid.ToString();
+            var bytes = ksuid.ToBytes();
+
+            // actual
+            var actual = Ksuid.Parse(bytes).ToString();
+
+            // assert
+            Assert.Equal(expected, actual);
+        }
     }
 }
