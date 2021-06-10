@@ -11,7 +11,7 @@ namespace DotKsuid
         private const int payloadLengthInBytes = 16;
         private const int byteLength = timestampLengthInBytes + payloadLengthInBytes;
         private const int stringEncodedLength = 27;
-        private const char Padding = '0';
+        private const char ZeroPadding = '0';
         private readonly byte[] _payload;
         private readonly uint _timestamp;
 
@@ -59,7 +59,7 @@ namespace DotKsuid
         public override string ToString()
         {
             return ToBytes().ToBase62()
-                    .PadLeft(stringEncodedLength, Padding);
+                    .PadLeft(stringEncodedLength, ZeroPadding);
         }
 
         public override bool Equals(object obj)
