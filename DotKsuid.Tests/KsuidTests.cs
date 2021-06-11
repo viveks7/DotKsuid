@@ -1,3 +1,4 @@
+using System.Text;
 using Xunit;
 
 namespace DotKsuid.Tests
