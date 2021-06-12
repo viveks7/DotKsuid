@@ -106,7 +106,7 @@ namespace DotKsuid
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_payload, _timestamp);
+            return base.GetHashCode();
         }
     }
 }

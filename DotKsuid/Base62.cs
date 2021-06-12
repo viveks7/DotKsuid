@@ -14,22 +14,18 @@ namespace DotKsuid
         public static string ToBase62(this byte[] src)
         {
             var converted = FastEncodeKsuidToBase62(src);
-            return string.Create(converted.Length, converted,
-                (buffer, base62Array) =>
+            var encode62Chars = Base62Characters;
+            Span<char> buffer = stackalloc char[27];
+            for (int i= converted.Length-1;  i>=0; i--)
             {
-                var encode62Chars = Base62Characters;
-
-                // Filling from behind to overcome bound checking costs.
-                for (int i=base62Array.Length-1;  i>=0; i--)
-                {
-                    buffer[i] = encode62Chars[base62Array[i]];
-                }
-            });
+                buffer[i] = encode62Chars[converted[i]];
+            }
+            return buffer.ToString();
         }
 
         public static byte[] FromBase62(this string src)
         {
-            return FastDecodeBase62Ksuid(src);
+            return FastDecodeBase62Ksuid(src.AsSpan());
         }
 
         private static byte[] FastEncodeKsuidToBase62(byte[] src)
