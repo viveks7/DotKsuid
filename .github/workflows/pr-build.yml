@@ -23,8 +23,15 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
+    - name: SonarScanner for .NET Core with pull request decoration support
+      uses: highbyte/sonarscan-dotnet@1.0.2
+      with:
+        # The key of the SonarQube project
+        sonarProjectKey: viveks7_DotKsuid
+        # The name of the SonarQube project
+        sonarProjectName:  DotKsuid
+        # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
+        sonarOrganization: viveks7
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
