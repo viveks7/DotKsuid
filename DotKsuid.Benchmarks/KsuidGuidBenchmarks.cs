@@ -23,22 +23,5 @@ namespace DotKsuid.Benchmarks
 
         [Benchmark]
         public string KsuidNetString() => KSUID.Ksuid.Generate().ToString();
-
-        //private Ksuid ksuid;
-        //private KSUID.Ksuid _ksuid;
-        //private byte[] input = Enumerable.Repeat<byte>(255, 20).ToArray();
-
-        //[GlobalSetup]
-        //public void GlobalSetup()
-        //{
-        //    ksuid = Ksuid.NewKsuid();
-        //    _ksuid = KSUID.Ksuid.Generate();
-        //}
-
-        //[Benchmark]
-        //public string Test() => ksuid.ToString();
-
-        //[Benchmark]
-        //public string Test2() => _ksuid.ToString();
     }
 }

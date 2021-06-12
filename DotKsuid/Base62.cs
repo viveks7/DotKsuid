@@ -13,11 +13,13 @@ namespace DotKsuid
 
         public static string ToBase62(this byte[] src)
         {
-            var converted = FastEncodeBase62(src);
+            var converted = FastEncodeKsuidToBase62(src);
             return string.Create(converted.Length, converted,
                 (buffer, base62Array) =>
             {
                 var encode62Chars = Base62Characters;
+
+                // Filling from behind to overcome bound checking costs.
                 for (int i=base62Array.Length-1;  i>=0; i--)
                 {
                     buffer[i] = encode62Chars[base62Array[i]];
@@ -27,12 +29,14 @@ namespace DotKsuid
 
         public static byte[] FromBase62(this string src)
         {
-            return FastDecodeBase62(src);
+            return FastDecodeBase62Ksuid(src);
         }
 
-        private static byte[] FastEncodeBase62(byte[] src)
+        private static byte[] FastEncodeKsuidToBase62(byte[] src)
         {
             var dest = new byte[27];
+
+            // To avoid bound checking in the subsequent statements.
             _ = src[19];
             var parts = new uint[5]
             {
@@ -67,9 +71,11 @@ namespace DotKsuid
             return dest;
         }
 
-        private static byte[] FastDecodeBase62(ReadOnlySpan<char> src)
+        private static byte[] FastDecodeBase62Ksuid(ReadOnlySpan<char> src)
         {
             var dest = new byte[20];
+            // To avoid bound checking in the subsequent statements.
+            _ = src[26];
             var parts = new uint[27]
             {
                 ConvertToBase62Value(src[0]),

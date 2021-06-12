@@ -14,9 +14,9 @@ namespace DotKsuid
             }
         });
 
-        public static void NextBytes(byte[] array)
+        public static void NextBytes(byte[] bytes)
         {
-            LocalRandom.Value.NextBytes(array);
+            LocalRandom.Value.NextBytes(bytes);
         }
     }
 }
