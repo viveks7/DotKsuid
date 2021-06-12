@@ -26,7 +26,7 @@ namespace DotKsuid.Tests
             var ksuid = Ksuid.NewKsuid();
 
             // actual
-            var actual = ksuid.ToBytes();
+            var actual = ksuid.ToByteArray();
 
             // assert
             Assert.NotEmpty(actual);
@@ -65,7 +65,7 @@ namespace DotKsuid.Tests
             // arrange
             var ksuid = Ksuid.NewKsuid();
             var expected = ksuid.ToString();
-            var bytes = ksuid.ToBytes();
+            var bytes = ksuid.ToByteArray();
 
             // actual
             var actual = Ksuid.Parse(bytes).ToString();

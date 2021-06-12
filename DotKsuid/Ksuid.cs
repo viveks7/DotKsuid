@@ -17,9 +17,9 @@ namespace DotKsuid
 
         public static Ksuid NewKsuid() => new Ksuid();
 
-        public static Ksuid MaxKsuid => new Ksuid(Enumerable.Repeat<byte>(255, KsuidBytesLength).ToArray());
+        public static readonly Ksuid MaxKsuid = new Ksuid(Enumerable.Repeat<byte>(255, KsuidBytesLength).ToArray());
 
-        public static Ksuid MinKsuid => new Ksuid(Enumerable.Repeat<byte>(0, KsuidBytesLength).ToArray());
+        public static readonly Ksuid MinKsuid = new Ksuid(Enumerable.Repeat<byte>(0, KsuidBytesLength).ToArray());
 
         public static Ksuid FromBytes(byte[] bytes) => new Ksuid(bytes);
 
@@ -53,6 +53,19 @@ namespace DotKsuid
             return new Ksuid(bytes);
         }
 
+        public static bool TryParse(string value, out Ksuid ksuid)
+        {
+            ksuid = null;
+            if (value == null || value.Length != KsuidStringEncodedLength)
+            {
+                return false;
+            }
+
+            var bytes = value.FromBase62();
+            ksuid = new Ksuid(bytes);
+            return true;
+        }
+
         private Ksuid()
         {
             _payload = new byte[PayloadLengthInBytes];
@@ -72,7 +85,7 @@ namespace DotKsuid
             _timestamp = BitConverter.ToUInt32(timestamp, 0);
         }
 
-        public byte[] ToBytes()
+        public byte[] ToByteArray()
         {
             var timestampBytes = BitConverter.GetBytes(_timestamp);
             if (BitConverter.IsLittleEndian)
@@ -88,7 +101,7 @@ namespace DotKsuid
 
         public override string ToString()
         {
-            return ToBytes().ToBase62()
+            return ToByteArray().ToBase62()
                     .PadLeft(KsuidStringEncodedLength, ZeroPadding);
         }
 
