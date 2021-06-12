@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DotKsuid
 {
-    public class Ksuid : IEquatable<Ksuid>
+    public sealed class Ksuid : IEquatable<Ksuid>
     {
         private const long EpochStamp = 1400000000;
         private const int TimestampLengthInBytes = 4;
@@ -119,7 +119,7 @@ namespace DotKsuid
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (_timestamp, _payload).GetHashCode();
         }
     }
 }

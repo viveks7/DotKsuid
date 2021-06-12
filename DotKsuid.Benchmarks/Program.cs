@@ -1,13 +1,11 @@
-﻿using System;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
 
 namespace DotKsuid.Benchmarks
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-
             BenchmarkRunner.Run<KsuidPerfTests>();
         }
     }
