@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -119,7 +120,9 @@ namespace DotKsuid
 
         public override int GetHashCode()
         {
-            return (_timestamp, _payload).GetHashCode();
+            var arrayHash = ((IStructuralEquatable)this._payload)
+                .GetHashCode(EqualityComparer<byte>.Default);
+            return arrayHash * 17 + _timestamp.GetHashCode();
         }
     }
 }
