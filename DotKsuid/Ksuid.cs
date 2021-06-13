@@ -18,9 +18,9 @@ namespace DotKsuid
 
         public static Ksuid NewKsuid() => new Ksuid();
 
-        public static readonly Ksuid MaxKsuid = new Ksuid(Enumerable.Repeat<byte>(255, KsuidBytesLength).ToArray());
+        public static Ksuid MaxKsuid() => new Ksuid(Enumerable.Repeat<byte>(255, KsuidBytesLength).ToArray());
 
-        public static readonly Ksuid MinKsuid = new Ksuid(Enumerable.Repeat<byte>(0, KsuidBytesLength).ToArray());
+        public static Ksuid MinKsuid() => new Ksuid(Enumerable.Repeat<byte>(0, KsuidBytesLength).ToArray());
 
         public static Ksuid FromBytes(byte[] bytes) => new Ksuid(bytes);
 

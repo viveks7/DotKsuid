@@ -1,4 +1,3 @@
-using System.Text;
 using Xunit;
 
 namespace DotKsuid.Tests
@@ -40,7 +39,7 @@ namespace DotKsuid.Tests
             var expected = "aWgEPTl1tmebfsQzFP4bxwgy80V";
 
             // actual
-            var actual = Ksuid.MaxKsuid.ToString();
+            var actual = Ksuid.MaxKsuid().ToString();
 
             // assert
             Assert.Equal(expected, actual);
@@ -53,7 +52,7 @@ namespace DotKsuid.Tests
             var expected = "000000000000000000000000000";
 
             // actual
-            var actual = Ksuid.MinKsuid.ToString();
+            var actual = Ksuid.MinKsuid().ToString();
 
             // assert
             Assert.Equal(expected, actual);
