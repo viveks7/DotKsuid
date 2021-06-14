@@ -52,7 +52,7 @@ namespace DotKsuid.Tests
             var actual = Ksuid.Parse(bytes);
 
             // assert
-            Assert.Equal(expected.ToString(), actual.ToString());
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace DotKsuid.Tests
             // assert
             Assert.True(actual);
             Assert.NotNull(actualKsuid);
-            Assert.Equal(expectedKsuid.ToString(), actualKsuid.ToString());
+            Assert.Equal(expectedKsuid, actualKsuid);
         }
 
         [Fact]
@@ -179,6 +179,78 @@ namespace DotKsuid.Tests
             // assert
             Assert.NotEmpty(actual);
             Assert.Equal(20, actual.Length);
+        }
+
+        [Fact]
+        public void Equals_ShouldReturnTrueIfEqual()
+        {
+            // arrange
+            var ksuid1 = Ksuid.NewKsuid();
+            var ksuid2 = Ksuid.Parse(ksuid1.ToByteArray());
+
+            // actual
+            var actual = ksuid1.Equals(ksuid2);
+
+            // assert
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void Equals_ShouldReturnFalseIfNotEqual()
+        {
+            // arrange
+            var ksuid1 = Ksuid.NewKsuid();
+            var ksuid2 = Ksuid.NewKsuid();
+
+            // actual
+            var actual = ksuid1.Equals(ksuid2);
+
+            // assert
+            Assert.False(actual);
+        }
+
+        [Fact]
+        public void EqualsOverride_ShouldReturnTrueIfEqual()
+        {
+            // arrange
+            object ksuid1 = Ksuid.NewKsuid();
+            object ksuid2 = Ksuid.Parse((ksuid1 as Ksuid).ToByteArray());
+
+            // actual
+            var actual = ksuid1.Equals(ksuid2);
+
+            // assert
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void GetHashCode_ShouldReturnSameHashcodeIfEqual()
+        {
+            // arrange
+            var ksuid1 = Ksuid.NewKsuid();
+            var ksuid2 = Ksuid.Parse(ksuid1.ToByteArray());
+
+            // actual
+            var ksuid1hashCode = ksuid1.GetHashCode();
+            var ksuid2hashCode = ksuid2.GetHashCode();
+
+            // assert
+            Assert.Equal(ksuid1hashCode, ksuid2hashCode);
+        }
+
+        [Fact]
+        public void GetHashCode_ShouldReturnDifferentHashcodeIfNotEqual()
+        {
+            // arrange
+            var ksuid1 = Ksuid.NewKsuid();
+            var ksuid2 = Ksuid.NewKsuid();
+
+            // actual
+            var ksuid1hashCode = ksuid1.GetHashCode();
+            var ksuid2hashCode = ksuid2.GetHashCode();
+
+            // assert
+            Assert.NotEqual(ksuid1hashCode, ksuid2hashCode);
         }
     }
 }

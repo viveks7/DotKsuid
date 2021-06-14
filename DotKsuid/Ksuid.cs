@@ -112,7 +112,7 @@ namespace DotKsuid
         public bool Equals(Ksuid other)
         {
             return other != null &&
-                   EqualityComparer<byte[]>.Default.Equals(_payload, other._payload) &&
+                   _payload.SequenceEqual(other._payload) &&
                    _timestamp == other._timestamp;
         }
 
