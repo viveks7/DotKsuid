@@ -105,7 +105,7 @@ namespace DotKsuid
                 ConvertToBase62Value(src[26]),
             };
             var destLength = dest.Length;
-            Span<uint> quotient = stackalloc uint[5];
+            Span<uint> quotient = stackalloc uint[27];
             while (parts.Length > 0)
             {
                 quotient.Clear();

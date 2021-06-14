@@ -22,8 +22,6 @@ namespace DotKsuid
 
         public static Ksuid MinKsuid() => new Ksuid(Enumerable.Repeat<byte>(0, KsuidBytesLength).ToArray());
 
-        public static Ksuid FromBytes(byte[] bytes) => new Ksuid(bytes);
-
         public static Ksuid Parse(byte[] bytes)
         {
             if (bytes == null)
@@ -120,7 +118,7 @@ namespace DotKsuid
 
         public override int GetHashCode()
         {
-            var arrayHash = ((IStructuralEquatable)this._payload)
+            var arrayHash = ((IStructuralEquatable)_payload)
                 .GetHashCode(EqualityComparer<byte>.Default);
             return arrayHash * 17 + _timestamp.GetHashCode();
         }
