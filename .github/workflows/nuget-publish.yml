@@ -1,51 +1,27 @@
 name: publish to nuget
 on:
   push:
-    branches:
-      - master # Default release branch
+    tags:
+    - "v[0-9]+.[0-9]+.[0-9]+"
 jobs:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      # - name: Setup dotnet
-      #   uses: actions/setup-dotnet@v1
-      #   with:
-      #     dotnet-version: 3.1.200
-
-      # Publish
-      - name: publish on version change
-        id: publish_nuget
-        uses: rohith/publish-nuget@v2
-        with:
-          # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: DotKsuid/DotKsuid.csproj
-          
-          # NuGet package id, used for version detection & defaults to project name
-           PACKAGE_NAME: DotKsuid
-          
-          # Filepath with version info, relative to root of repository & defaults to PROJECT_FILE_PATH
-          # VERSION_FILE_PATH: Directory.Build.props
-
-          # Regex pattern to extract version info in a capturing group
-          # VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-          
-          # Useful with external providers like Nerdbank.GitVersioning, ignores VERSION_FILE_PATH & VERSION_REGEX
-          VERSION_STATIC: 1.0.0
-
-          # Flag to toggle git tagging, enabled by default
-          # TAG_COMMIT: true
-
-          # Format of the git tag, [*] gets replaced with actual version
-          # TAG_FORMAT: v*
-
-          # API key to authenticate with NuGet server
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-
-          # NuGet server uri hosting the packages, defaults to https://api.nuget.org
-          NUGET_SOURCE: https://api.nuget.org
-
-          # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
-          # INCLUDE_SYMBOLS: false
+      - name: Verify commit exists in origin/main
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+          git branch --remote --contains | grep origin/main
+      - name: Set VERSION variable from tag
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - name: Build
+        run: dotnet build --configuration Release /p:Version=${VERSION}
+      - name: Test
+        run: dotnet test --configuration Release /p:Version=${VERSION} --no-build
+      - name: Pack
+        run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
+      - name: Push
+        run: dotnet nuget push DotKsuid.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY}
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
