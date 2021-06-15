@@ -13,5 +13,6 @@
     <PackageId>DotKsuid</PackageId>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/viveks7/DotKsuid</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
