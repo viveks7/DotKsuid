@@ -1,4 +1,4 @@
-name: publish to nuget
+name: Publish To NuGet - Preview
 on:
   push:
     tags:
