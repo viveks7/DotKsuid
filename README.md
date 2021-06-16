@@ -2,7 +2,7 @@
 
 A .NET Standard 2.0 port of [Segment's](https://segment.com/) implementation of [K-Sortable Unique IDentifiers(KSUID)](https://github.com/segmentio/ksuid). This library has been optimised for better performance and less memory utilization.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=alert_status)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=coverage)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)
+[![Build](https://github.com/viveks7/DotKsuid/actions/workflows/build.yml/badge.svg)](https://github.com/viveks7/DotKsuid/actions/workflows/build.yml)  [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=alert_status)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=coverage)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)
 
 # Installation
 
