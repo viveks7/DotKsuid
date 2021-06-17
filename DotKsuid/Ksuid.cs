@@ -7,10 +7,16 @@ namespace DotKsuid
 {
     public sealed class Ksuid : IEquatable<Ksuid>
     {
-        private const long EpochStamp = 1400000000;
+        // KSUID's epoch starts more recently so that the 32-bit number space gives a
+        // significantly higher useful lifetime of around 136 years from March 2017.
+        private const uint EpochStamp = 1400000000;
         private const int TimestampLengthInBytes = 4;
         private const int PayloadLengthInBytes = 16;
+
+        // 20 bytes long when binary encoded
         private const int KsuidBytesLength = TimestampLengthInBytes + PayloadLengthInBytes;
+
+        // Length of a KSUID when string (base62) encoded
         private const int KsuidStringEncodedLength = 27;
         private const char ZeroPadding = '0';
         private readonly byte[] _payload;
@@ -82,6 +88,27 @@ namespace DotKsuid
                 Array.Reverse(timestamp);
             }
             _timestamp = BitConverter.ToUInt32(timestamp, 0);
+        }
+
+        public uint TimeStamp
+        {
+            get
+            {
+                return _timestamp;
+            }
+        }
+
+        public byte[] Payload
+        {
+            get
+            {
+                return _payload;
+            }
+        }
+
+        public uint ToUnixTimeSeconds()
+        {
+            return _timestamp + EpochStamp;
         }
 
         public byte[] ToByteArray()

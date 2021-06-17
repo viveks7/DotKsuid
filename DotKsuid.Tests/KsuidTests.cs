@@ -252,5 +252,46 @@ namespace DotKsuid.Tests
             // assert
             Assert.NotEqual(ksuid1hashCode, ksuid2hashCode);
         }
+
+        [Fact]
+        public void TimeStamp_ShouldReturnTimestamp()
+        {
+            // arrange
+            var ksuid = Ksuid.NewKsuid();
+
+            // actual
+            var timestamp = ksuid.TimeStamp;
+
+            // assert
+            Assert.NotEqual(uint.MinValue, timestamp);
+        }
+
+        [Fact]
+        public void TimeStamp_ShouldReturnPayload()
+        {
+            // arrange
+            var ksuid = Ksuid.NewKsuid();
+
+            // actual
+            var payload = ksuid.Payload;
+
+            // assert
+            Assert.NotEmpty(payload);
+            Assert.Equal(16, payload.Length);
+        }
+
+        [Fact]
+        public void ToUnixTimeSeconds_ShouldReturnUnixTimeSeconds()
+        {
+            // arrange
+            var currentValue = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            var ksuid = Ksuid.NewKsuid();
+
+            // actual
+            var actual = ksuid.ToUnixTimeSeconds();
+
+            // assert
+            Assert.InRange(actual, currentValue - 1, currentValue + 1);
+        }
     }
 }
