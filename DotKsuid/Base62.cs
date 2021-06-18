@@ -46,6 +46,7 @@ namespace DotKsuid
             Span<uint> quotient = stackalloc uint[5];
             while (parts.Length > 0)
             {
+                // reusing the quotient array
                 quotient.Clear();
                 ulong remainder = 0;
                 int counter = 0;
@@ -108,6 +109,7 @@ namespace DotKsuid
             Span<uint> quotient = stackalloc uint[27];
             while (parts.Length > 0)
             {
+                // reusing the quotient array
                 quotient.Clear();
                 ulong remainder = 0;
                 int counter = 0;

@@ -1,23 +1,22 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using BenchmarkDotNet.Attributes;
 
 namespace DotKsuid.Benchmarks
 {
     [ExcludeFromCodeCoverage]
     [MemoryDiagnoser]
-    public class KsuidGuidBenchmarks
+    public class KsuidDotKsuidBenchmarks
     {
         [Benchmark]
         public Ksuid DotKsuid() => Ksuid.NewKsuid();
 
         [Benchmark]
-        public Guid Guids() => Guid.NewGuid();
+        public KSUID.Ksuid Ksuids() => KSUID.Ksuid.Generate();
 
         [Benchmark]
         public string DotKsuidString() => Ksuid.NewKsuid().ToString();
 
         [Benchmark]
-        public string GuidString() => Guid.NewGuid().ToString();
+        public string KsuidString() => KSUID.Ksuid.Generate().ToString();
     }
 }

@@ -8,7 +8,8 @@ namespace DotKsuid.Benchmarks
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<KsuidPerfTests>();
+            BenchmarkRunner.Run<KsuidGuidBenchmarks>();
+            BenchmarkRunner.Run<KsuidDotKsuidBenchmarks>();
         }
     }
 
