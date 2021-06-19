@@ -2,8 +2,8 @@
 
 A .NET Standard 2.0 port of [Segment's](https://segment.com/) implementation of [K-Sortable Unique IDentifiers(KSUID)](https://github.com/segmentio/ksuid). You can use this instead of GUID's where you can take advantage of it's
 
-  * Naturally ordering by generation time
-  * Collision-free, coordination-free & dependency-free
+  * Natural ordering by generation time
+  * Collision-free, coordination-free & dependency-free nature
   * Highly portable representation
 
 [![Build](https://github.com/viveks7/DotKsuid/actions/workflows/build.yml/badge.svg)](https://github.com/viveks7/DotKsuid/actions/workflows/build.yml)  [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=alert_status)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)  [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=viveks7_DotKsuid&metric=coverage)](https://sonarcloud.io/dashboard?id=viveks7_DotKsuid)
