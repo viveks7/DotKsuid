@@ -14,5 +14,9 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/viveks7/DotKsuid</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>Vivek Sasidharan</Authors>
+    <Title>DotKsuid</Title>
+    <Description>A .NET Standard 2.0 port of Segment's implementation of K-Sortable Unique IDentifiers(KSUID).</Description>
+    <PackageTags>ksuid;guid</PackageTags>
   </PropertyGroup>
 </Project>
