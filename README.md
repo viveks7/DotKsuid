@@ -13,7 +13,7 @@ A .NET Standard 2.0 port of [Segment's](https://segment.com/) implementation of 
 To install from NuGet with `dotnet` CLI, use following command
 
 ```
-dotnet add package DotKsuid --version 1.0.0-preview1
+dotnet add package DotKsuid --version 1.0.0
 ```
 
 # Usage
